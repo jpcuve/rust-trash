@@ -36,6 +36,6 @@ struct ItemB {
 
 fn main() {
     println!("Hello, world!");
-    let mut c = Container::new();
+    let c = Container::new();
     println!("{:?}", c);
 }
