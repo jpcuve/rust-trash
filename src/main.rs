@@ -34,8 +34,34 @@ struct ItemB {
     item: Item,
 }
 
+#[derive(Debug)]
+enum Phase {
+    Intro,
+    Game,
+    Credits,
+}
+
+trait Update{
+    fn update(&self) -> Self;
+}
+
+impl Update for Phase {
+    fn update(&self) -> Self {
+        match &self {
+            Phase::Intro => Phase::Game,
+            Phase::Game => Phase::Credits,
+            Phase::Credits => Phase::Intro
+        }
+    }
+}
+
 fn main() {
     println!("Hello, world!");
     let c = Container::new();
     println!("{:?}", c);
+    let mut phase = Phase::Intro;
+    for _ in 0..10 {
+        phase = phase.update();
+        println!("{:?}", phase);
+    }
 }
