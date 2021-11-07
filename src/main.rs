@@ -1,3 +1,10 @@
+mod interface;
+mod game_design;
+
+use crate::interface::inter;
+use crate::game_design::Game;
+
+
 #[derive(Debug)]
 struct Container {
     a_items: Vec<ItemA>,
@@ -19,14 +26,20 @@ struct Item {
 }
 
 impl Item {
-    fn new(name: String) -> Self {
-        Item { name }
+    fn new(name: &str) -> Self {
+        Item { name: String::from(name) }
     }
 }
 
 #[derive(Debug)]
 struct ItemA {
     item: Item,
+}
+
+impl ItemA {
+    fn something(&self){
+        println!("Item A!");
+    }
 }
 
 #[derive(Debug)]
@@ -36,32 +49,37 @@ struct ItemB {
 
 #[derive(Debug)]
 enum Phase {
-    Intro,
-    Game,
-    Credits,
+    Intro(ItemA),
+    Game(ItemB),
+    Credits(Item),
 }
 
-trait Update{
-    fn update(&self) -> Self;
-}
-
-impl Update for Phase {
-    fn update(&self) -> Self {
-        match &self {
-            Phase::Intro => Phase::Game,
-            Phase::Game => Phase::Credits,
-            Phase::Credits => Phase::Intro
-        }
+fn test(){
+    println!("Hello, world!");
+    let c = Container::new();
+    println!("{:?}", c);
+    let mut item_a = ItemA { item: Item::new("Item A")};
+    let mut item_b = ItemB { item: Item::new("Item B")};
+    let mut item_c = Item::new("Item");
+    let mut phase_a = Phase::Intro(item_a);
+    let mut phase_b = Phase::Game(item_b);
+    let mut phase_c = Phase::Credits(item_c);
+    let mut phase = &phase_a;
+    for _ in 0..10 {
+        let phase = match phase {
+            Phase::Intro(item) => {
+                item.something();
+                &phase_b
+            },
+            Phase::Game(_) => &phase_c,
+            Phase::Credits(_) => &phase_a,
+        };
+        // phase = phase.update();
+        println!("{:?}", phase);
     }
 }
 
 fn main() {
-    println!("Hello, world!");
-    let c = Container::new();
-    println!("{:?}", c);
-    let mut phase = Phase::Intro;
-    for _ in 0..10 {
-        phase = phase.update();
-        println!("{:?}", phase);
-    }
+    let game = Game::default();
+    game.update();
 }
