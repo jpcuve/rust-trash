@@ -1,15 +1,9 @@
+use nalgebra_glm::Vec3;
 use rand::prelude::*;
 
 #[derive(Default, Debug)]
 struct Shape {
 
-}
-
-#[derive(Default, Debug)]
-struct Vec3 {
-    x: f64,
-    y: f64,
-    z: f64,
 }
 
 #[derive(Default, Debug)]
