@@ -62,17 +62,41 @@ struct Asteroid {
     game_object: GameObject,
 }
 
+trait Screen {
+    fn update(&self);
+    fn paint(&self);
+}
+
 #[derive(Default, Debug)]
-pub struct Game {
+struct Action {
     ships: Vec<Ship>,
     bullets: Vec<Bullet>,
     asteroids: Vec<Asteroid>
 }
 
-impl Game {
-    pub fn update(&self){
+impl Screen for Action {
+    fn update(&self){
         for ship in self.ships.iter(){
             ship.fire(&self.bullets)
         }
+    }
+
+    fn paint(&self) {
+        todo!()
+    }
+}
+
+struct Introduction;
+struct Credits;
+
+#[derive(Default, Debug)]
+pub struct Game {
+    screen: Box<dyn Screen>,
+}
+
+impl Game {
+
+    pub fn update(&self){
+        self.screen.update();
     }
 }
