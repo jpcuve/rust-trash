@@ -83,13 +83,17 @@ impl Screen for Action {
 struct Introduction;
 struct Credits;
 
-#[derive(Default, Debug)]
 pub struct Game {
     screen: Box<dyn Screen>,
 }
 
-impl Game {
+impl Default for Game {
+    fn default() -> Self {
+        Game{screen: Box::new(Action::default())}
+    }
+}
 
+impl Game {
     pub fn update(&self){
         self.screen.update();
     }

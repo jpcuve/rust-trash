@@ -1,8 +1,11 @@
 mod interface;
 mod game_design;
+mod state_machine;
 
+use std::error::Error;
 use crate::interface::inter;
 use crate::game_design::Game;
+use crate::state_machine::State;
 
 
 #[derive(Debug)]
@@ -11,8 +14,8 @@ struct Container {
     b_items: Vec<ItemB>
 }
 
-impl Container {
-    fn new() -> Self {
+impl Default for Container {
+    fn default() -> Self {
         Container {
             a_items: vec!{},
             b_items: vec!{},
@@ -56,7 +59,7 @@ enum Phase {
 
 fn test(){
     println!("Hello, world!");
-    let c = Container::new();
+    let c = Container::default();
     println!("{:?}", c);
     let mut item_a = ItemA { item: Item::new("Item A")};
     let mut item_b = ItemB { item: Item::new("Item B")};
@@ -79,7 +82,13 @@ fn test(){
     }
 }
 
-fn main() {
+fn main() -> Result<(), E> {
+    let mut state = State::StateA;
+    state = state.transition();
+    println!("{:?}", state);
+    Ok(())
+/*
     let game = Game::default();
     game.update();
+*/
 }
