@@ -82,11 +82,10 @@ fn test(){
     }
 }
 
-fn main() -> Result<(), E> {
+fn main() {
     let mut state = State::StateA;
     state = state.transition();
     println!("{:?}", state);
-    Ok(())
 /*
     let game = Game::default();
     game.update();

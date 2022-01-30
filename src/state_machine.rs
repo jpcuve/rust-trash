@@ -5,9 +5,9 @@ pub enum State {
 
 impl State {
     pub fn transition(&self) -> State {
-        match self {
-            State::StateA=> State::StateB,
-            State::StateB=> State::StateC,
+        match &self {
+            State::StateA => State::StateB,
+            State::StateB => State::StateC,
             State::StateC => State::StateA,
         }
     }
