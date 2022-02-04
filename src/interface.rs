@@ -19,10 +19,25 @@ impl Speaker for B {
     }
 }
 
-
 impl Speaker for C {
     fn say(&self) {
         println!("C!");
+    }
+}
+
+enum Test {  // the big difference is we have here just 3 well defined objects
+    D,
+    E,
+    F,
+}
+
+impl Speaker for Test {
+    fn say(&self) {
+        match self {
+            &Test::D => println!("D!"),
+            &Test::E => println!("E!"),
+            &Test::F => println!("F!"),
+        }
     }
 }
 
@@ -42,6 +57,13 @@ pub fn inter() {
         v.push(Box::new(C{}));
     }
     for e in v.iter(){
+        e.say();
+    }
+    let mut v2: Vec<Test> = vec!();
+    v2.push(Test::F);
+    v2.push(Test::F);
+    v2.push(Test::E);
+    for e in v2.iter(){
         e.say();
     }
 }
