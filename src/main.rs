@@ -61,12 +61,12 @@ fn test(){
     println!("Hello, world!");
     let c = Container::default();
     println!("{:?}", c);
-    let mut item_a = ItemA { item: Item::new("Item A")};
-    let mut item_b = ItemB { item: Item::new("Item B")};
-    let mut item_c = Item::new("Item");
-    let mut phase_a = Phase::Intro(item_a);
-    let mut phase_b = Phase::Game(item_b);
-    let mut phase_c = Phase::Credits(item_c);
+    let item_a = ItemA { item: Item::new("Item A")};
+    let item_b = ItemB { item: Item::new("Item B")};
+    let item_c = Item::new("Item");
+    let phase_a = Phase::Intro(item_a);
+    let phase_b = Phase::Game(item_b);
+    let phase_c = Phase::Credits(item_c);
     let mut phase = &phase_a;
     for _ in 0..10 {
         let phase = match phase {
