@@ -1,6 +1,7 @@
 mod interface;
 mod game_design;
 mod state_machine;
+mod lisp;
 
 use std::error::Error;
 use crate::interface::inter;
