@@ -62,13 +62,13 @@ trait Screen {
 }
 
 #[derive(Default, Debug)]
-struct Action {
+struct Game {
     ships: Vec<Ship>,
     bullets: Vec<Bullet>,
     asteroids: Vec<Asteroid>
 }
 
-impl Screen for Action {
+impl Screen for Game {
     fn update(&self){
         for ship in self.ships.iter(){
             ship.fire(&self.bullets)
@@ -80,21 +80,37 @@ impl Screen for Action {
     }
 }
 
+#[derive(Default, Debug)]
 struct Introduction;
+
+impl Screen for Introduction {
+    fn update(&self) {
+        todo!()
+    }
+
+    fn paint(&self) {
+        todo!()
+    }
+}
+
+#[derive(Default, Debug)]
 struct Credits;
 
-pub struct Game {
-    screen: Box<dyn Screen>,
-}
+impl Screen for Credits {
+    fn update(&self) {
+        todo!()
+    }
 
-impl Default for Game {
-    fn default() -> Self {
-        Game{screen: Box::new(Action::default())}
+    fn paint(&self) {
+        todo!()
     }
 }
 
-impl Game {
-    pub fn update(&self){
-        self.screen.update();
-    }
+pub fn run_game(){
+    let game = Box::new(Game::default());
+    let introduction = Box::new(Introduction::default());
+    let credits = Box::new(Credits::default());
+    let mut screen: Box<dyn Screen> = game;
+    screen = introduction;
+    screen = credits;
 }
