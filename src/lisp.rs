@@ -14,17 +14,16 @@ impl Display for Token {
             Token::Nil => write!(f, "()"),
             Token::Single(s) => write!(f, "{}", s),
             Token::List(v) => {
-                write!(f, "(");
+                write!(f, "(")?;
                 let mut space = false;
                 for b in v {
                     if space {
-                        write!(f, " ");
+                        write!(f, " ")?;
                     }
-                    write!(f, "{}", *b);
+                    write!(f, "{}", *b)?;
                     space = true;
                 }
-                write!(f, ")");
-                Ok(())
+                write!(f, ")")
             },
         }
     }

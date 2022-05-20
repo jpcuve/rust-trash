@@ -112,5 +112,6 @@ pub fn run_game(){
     let credits = Box::new(Credits::default());
     let mut screen: Box<dyn Screen> = game;
     screen = introduction;
+    screen.update();
     screen = credits;
 }
