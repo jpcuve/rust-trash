@@ -7,4 +7,6 @@ edition = "2018"
 
 [dependencies]
 rand = "*"
-nalgebra-glm = "0.15.0"
+nalgebra-glm = "*"
+hyper= { version = "*", features = ["full"] }
+tokio = { version = "1", features = ["full"] }
